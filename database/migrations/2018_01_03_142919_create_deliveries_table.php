@@ -16,12 +16,12 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('status')->default('inProgress');
             $table->unsignedInteger('user_id');
             $table->string('deliveryAddress');
-            $table->string('custommerName');
+            $table->string('customerName');
             $table->string('contactPhoneNumber');
             $table->string('note')->nullable();
-
             $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
         });
     }
