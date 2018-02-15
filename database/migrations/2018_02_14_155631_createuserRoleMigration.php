@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusToDeliveries extends Migration
+class CreateuserRoleMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddStatusToDeliveries extends Migration
      */
     public function up()
     {
-        Schema::table('deliveries', function (Blueprint $table) {
-            $table->string('status')->default('inProgress');
+        Schema::create('role_user', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
+            $table->integer('user_id');
+            $table->integer('role_id');
         });
     }
 
@@ -25,8 +28,6 @@ class AddStatusToDeliveries extends Migration
      */
     public function down()
     {
-        Schema::table('deliveries', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('user_role');
     }
 }

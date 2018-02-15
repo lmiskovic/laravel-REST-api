@@ -177,7 +177,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\SocialAuthServiceProvider::class
+        App\Providers\SocialAuthServiceProvider::class,
+        /*
+        *CORS
+        */
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 

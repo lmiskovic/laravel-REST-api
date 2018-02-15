@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Post;
 use App\SocialAccount;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,5 +35,9 @@ class User extends Authenticatable
 
     public function deliveries(){
         return $this->hasMany(delivery::class);
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Role');
     }
 }
