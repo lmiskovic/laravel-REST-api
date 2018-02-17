@@ -35,11 +35,11 @@ class RegisterController extends Controller
     		'email' => request('email'),
     		'password' => bcrypt(request('password')),
     	]);
-
+        
         if(request('required_role') == 'Driver'){
-            $user->roles()->attach($roleDriver->id);
+            $user->roles()->attach($roleDriver);
         } else {
-            $user->roles()->attach($roleDispathcer->id);
+            $user->roles()->attach($roleDispathcer);
         }
         
     	return $this->issueToken($request, 'password');
