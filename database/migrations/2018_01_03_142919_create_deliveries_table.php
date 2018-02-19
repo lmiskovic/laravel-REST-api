@@ -16,7 +16,7 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('status')->default('inProgress');
+            $table->string('status')->default('In progress');
             $table->unsignedInteger('user_id');
             $table->string('deliveryAddress');
             $table->string('customerName');

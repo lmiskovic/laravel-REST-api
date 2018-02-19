@@ -21,6 +21,12 @@ class DeliveryController extends Controller
 		return response()->json(['data' => $data], 200, [], JSON_NUMERIC_CHECK);
 	}
 
+	public function updateDelivery(Request $request){
+		$id = $request->id;
+		Delivery::where('id', $id)->update($request->all());
+  		return response()->json([], 204);
+	}
+
 	public function getDriverNames(Request $request){
 		//$users = DB::table('users')->select('id', 'name')->get();
 		$data = array();
@@ -53,10 +59,18 @@ class DeliveryController extends Controller
 
 	public function createDelivery(Request $request){
 
+		$this->validate($request, [
+			    	'deliveryAddress' => 'required',
+			    	'customerName' => 'required',
+			    	'contactPhoneNumber' => 'required',
+			    	'user_id' => 'required'
+			    ]);
+
 		$delivery = Delivery::create([
 			'user_id' => request('user_id'),
     		'contactPhoneNumber' => request('contactPhoneNumber'),
     		'customerName' => request('customerName'),
+    		'status' => request('status'),
     		'deliveryAddress' => request('deliveryAddress'),
     		'note' => request('note'),
     	]);

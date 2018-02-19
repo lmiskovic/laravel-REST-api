@@ -18,10 +18,13 @@ Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('refresh', 'Api\Auth\LoginController@refresh');
 
 Route::middleware('auth:api')->group(function () {
+	Route::post('updateDelivery', 'Api\DeliveryController@updateDelivery')->middleware('roles:Dispatcher');
 	Route::get('getDriverNames', 'Api\DeliveryController@getDriverNames')->middleware('roles:Driver,Dispatcher');
     Route::get('getDeliveries', 'Api\DeliveryController@getDeliveries')->middleware('roles:Driver');
     Route::get('deliveriesAll', 'Api\DeliveryController@getAll')->middleware('roles:Driver,Dispatcher');
     Route::post('createDelivery', 'Api\DeliveryController@createDelivery')->middleware('roles:Dispatcher');
     Route::post('logout', 'Api\Auth\LoginController@logout');
     Route::post('setDelivered', 'Api\DeliveryController@setDelivered')->middleware('roles:Driver,Dispatcher');
+    Route::post('updateLastLocation', 'Api\DriverController@updateLastLocation')->middleware('roles:Driver');
+    Route::get('getLastLocation', 'Api\DriverController@getLastLocation')->middleware('roles:Dispatcher');
 });
