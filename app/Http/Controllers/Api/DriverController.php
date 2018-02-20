@@ -16,14 +16,15 @@ class DriverController extends Controller
 		return response()->json([], 204);
     }
 
-    public function getLastLocation(Request $request){
+    public function getLastLocations(Request $request){
     	$data = array();
 
 		$locations = DB::table('users')
 							->select('lastLocation', 'name')
-
-    	foreach ($locations as $locations->lastLocation => $locations->name) { 
-		  $locations[$users->lastLocation] = $users->name;
+							->whereNotNull('lastLocation')
+							->get();
+		foreach ($locations as $locations->name => $locations->lastLocation) { 
+			$data[$locations->name] = $locations->lastLocation;
 		}
 
 		return response()->json(['data' => $data], 200, [], JSON_NUMERIC_CHECK);
