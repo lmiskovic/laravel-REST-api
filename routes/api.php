@@ -22,7 +22,7 @@ Route::middleware('auth:api')->group(function () {
 	Route::get('getDriverNames', 'Api\DeliveryController@getDriverNames')->middleware('roles:Driver,Dispatcher');
     Route::get('getDeliveries', 'Api\DeliveryController@getDeliveries')->middleware('roles:Driver');
     Route::post('deleteDelivery', 'Api\DeliveryController@deleteDelivery')->middleware('roles:Dispatcher');
-    Route::get('deliveriesAll', 'Api\DeliveryController@getAll')->middleware('roles:Driver,Dispatcher');
+    Route::get('deliveriesAll', 'Api\DeliveryController@getAll')->middleware('roles:Dispatcher');
     Route::get('getDeliveryCounts', 'Api\DeliveryController@getDeliveryCounts')->middleware('roles:Dispatcher');
     Route::post('createDelivery', 'Api\DeliveryController@createDelivery')->middleware('roles:Dispatcher');
     Route::post('logout', 'Api\Auth\LoginController@logout');

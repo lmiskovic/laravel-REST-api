@@ -48,6 +48,8 @@ class LoginController extends Controller
     		->where('access_token_id', $accessToken->id)
     		->update(['revoked' => true]);
 
+        Auth::user()->update(['lastLocation' => null]);
+
     	$accessToken->revoke();
 
     	return response()->json([], 204);

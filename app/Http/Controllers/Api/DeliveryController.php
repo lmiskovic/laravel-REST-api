@@ -12,7 +12,7 @@ use App\User;
 class DeliveryController extends Controller
 {
 	public function getDeliveries(){
-		$data = Auth::user()->deliveries()->get();
+		$data = Auth::user()->deliveries()->where('status', 'In progress')->get();
 		return response()->json(['data' => $data], 200, [], JSON_NUMERIC_CHECK);
 	}
 
@@ -56,18 +56,18 @@ class DeliveryController extends Controller
 
 	public function setDelivered(Request $request){
 
-		$id = $request->user_id;
+		$id = $request->delivery_id;
 
-		$delivery = Delivery::findOrFail($id);
+		$delivery = Delivery::where('id','=',$id)->firstOrFail();
 
 		if($delivery->status != 'In progress'){
-			return response()->json(['delivery' => $delivery], 204, [], JSON_NUMERIC_CHECK);
+		 return response()->json('',404);
 		}
 
 		DB::table('deliveries')
     		->where('id', $id)
     		->update(['status' => 'Delivered']);
-    	return response()->json(['delivery' => $delivery], 200, [], JSON_NUMERIC_CHECK);
+		 return response()->json('',204);
 	}
 
 	public function createDelivery(Request $request){
@@ -93,9 +93,7 @@ class DeliveryController extends Controller
 
     public function deleteDelivery(Request $request){
 
-		$id = $request->id;
-
-		$delivery = Delivery::findOrFail($id);
+		$id = $request->delivery_id;
 
 		DB::table('deliveries')
     		->where('id', $id)
